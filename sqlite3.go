@@ -250,9 +250,14 @@ const (
 var driverName = "sqlite3"
 
 func init() {
-	if driverName != "" {
-		sql.Register(driverName, &SQLiteDriver{})
-	}
+
+	sql.Register("notify",
+	&SQLiteDriver{
+		Extensions: []string{
+			"/lib/notification_extension.so",  // Full path to the library
+		},
+	})
+
 }
 
 // Version returns SQLite library version information.
